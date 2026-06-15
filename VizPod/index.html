@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Makeup Sales 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    <h1>Makeup Sales · 2025</h1>
+</header>
+
+<section class="grid">
+
+  <div class="card span-12">
+    <h2>Revenue by Brand</h2>
+    <svg id="chartBrands" viewBox="0 0 1100 320"></svg>
+  </div>
+
+  <div class="card span-12">
+    <h2>Monthly Revenue Trend</h2>
+    <svg id="chartTrend" viewBox="0 0 1200 360"></svg>
+    <div class="legend" id="trendLegend"></div>
+  </div>
+
+  <div class="card span-12" id="explorerCard">
+    <h2>Brand Explorer</h2>
+    <div class="hint">Select a brand to see its details</div>
+    <div class="controls" style="margin-bottom:20px">
+      <label>Brand</label>
+      <select id="selBrand"></select>
+    </div>
+    <div class="explorer-grid">
+      <div class="explorer-sub">
+        <div class="sub-title">Orders by Channel &amp; Payment</div>
+        <svg id="chartOrders" viewBox="0 0 420 300"></svg>
+        <div class="legend" id="ordersLegend"></div>
+      </div>
+      <div class="explorer-sub explorer-sub--center">
+        <div class="sub-title">Products · Units Sold</div>
+        <svg id="chartProducts" viewBox="0 0 400 340"></svg>
+        <div class="legend" id="productLegend"></div>
+      </div>
+      <div class="explorer-sub">
+        <div class="sub-title">Revenue by Country</div>
+        <svg id="chartCountries" viewBox="0 0 380 300"></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="card span-12">
+    <h2>Brand Comparison</h2>
+    <div class="hint">Pick two brands and compare</div>
+    <div class="controls">
+      <label>Brand A</label><select id="selA"></select>
+      <label>Brand B</label><select id="selB"></select>
+    </div>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:start" id="vsWrap">
+      <svg id="chartRadar" viewBox="0 0 520 440"></svg>
+      <div id="vsTable"></div>
+    </div>
+  </div>
+
+</section>
+
+<div class="tip" id="tip"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
