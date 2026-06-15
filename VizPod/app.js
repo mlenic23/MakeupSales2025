@@ -1,6 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
    app.js – Interaktivna vizualizacija prodaje kozmetike 2025.
-   Student: Marta Lenić, DRD
 
    KORIŠTENI IZVORI:
    [1] D3.js – Data-Driven Documents, M. Bostock et al.
