@@ -1,3 +1,33 @@
+/* ═══════════════════════════════════════════════════════════════
+   app.js – Interaktivna vizualizacija prodaje kozmetike 2025.
+   Student: Marta Lenić, DRD
+
+   KORIŠTENI IZVORI:
+   [1] D3.js – Data-Driven Documents, M. Bostock et al.
+       https://d3js.org
+       Korišteno: sve D3 funkcije (skale, osi, animacije, rollups)
+
+   [2] Observable D3 Gallery, M. Bostock
+       https://observablehq.com/@d3/gallery
+       Korišteno: tehnika animacije linijskog grafikona (stroke-dashoffset)
+
+   [3] D3 Graph Gallery – Donut Chart, Y. Holtz
+       https://d3-graph-gallery.com/donut.html
+       Korišteno: obrazac prstenastog grafikona s innerRadius i tekstom u sredini
+
+   [4] D3 Graph Gallery – Lollipop Chart, Y. Holtz
+       https://d3-graph-gallery.com/lollipop.html
+       Korišteno: kombinacija line + circle s animiranim rastom iz ishodišta
+
+   [5] D3 Graph Gallery – Radar / Spider Chart, Y. Holtz
+       https://d3-graph-gallery.com/spider.html
+       Korišteno: algoritam kutova osi i projiciranje normaliziranih vrijednosti
+
+   [6] Makeup Sales in 2025 dataset, A. E. Syed
+       https://www.kaggle.com/datasets/syedaeman2212/makeup-sales-in-2025
+       Korišteno: izvorni skup podataka (500 transakcija, 10 atributa)
+   ═══════════════════════════════════════════════════════════════ */
+
 /* ─────────────────────────────────────────────────────────────
    TOOLTIP – prikaz informacija na hover
    ───────────────────────────────────────────────────────────── */
@@ -257,6 +287,8 @@ d3.csv("makeup_sales_dataset_2025.csv", (d) => ({
       .attr("font-size", 11)
       .text("Revenue (USD)");
 
+/*Animacija crtanja linija tehnikom stroke-dashoffset
+  Izvor: Observable D3 Gallery – https://observablehq.com/@d3/gallery*/
     brandRows.forEach((b, i) => {
       const col = brandColor(b.brand);
       const safeName = b.brand.replace(/\W/g, "_");
@@ -373,6 +405,8 @@ d3.csv("makeup_sales_dataset_2025.csv", (d) => ({
 
       const totalU = d3.sum(byProduct, (d) => d.v);
 
+   /*Prstenasti grafikon s innerRadius i tekstom u sredini
+     Izvor: D3 Graph Gallery – https://d3-graph-gallery.com/donut.html */
       const pie  = d3.pie().sort(null).value((d) => d.v);
       const arc  = d3.arc().innerRadius(r * 0.54).outerRadius(r).padAngle(0.016).cornerRadius(4);
       const arcH = d3.arc().innerRadius(r * 0.54).outerRadius(r + 8).padAngle(0.016).cornerRadius(4);
@@ -592,6 +626,8 @@ d3.csv("makeup_sales_dataset_2025.csv", (d) => ({
         .attr("text-anchor", "middle").attr("fill", "#c2a4c9").attr("font-size", 10)
         .text("Country");
 
+  /*Lollipop grafikon – kombinacija linija i krugova s animiranim rastom
+    Izvor: D3 Graph Gallery – https://d3-graph-gallery.com/lollipop.html */
       svg.selectAll(".stem")
         .data(byCountry)
         .join("line")
@@ -657,6 +693,8 @@ d3.csv("makeup_sales_dataset_2025.csv", (d) => ({
   selA.property("value", byBrand[0].brand);
   selB.property("value", byBrand[1].brand);
 
+  /*Radar grafikon – algoritam kutova osi i normalizacija vrijednosti
+    Izvor: D3 Graph Gallery – https://d3-graph-gallery.com/spider.html */
   function drawRadar() {
     const a = byBrand.find((b) => b.brand === selA.property("value"));
     const b = byBrand.find((b) => b.brand === selB.property("value"));
